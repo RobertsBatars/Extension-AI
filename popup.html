@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Claude Screenshot Analyzer</title>
+  <style>
+    body {
+      width: 250px;
+      padding: 12px;
+      font-family: Arial, sans-serif;
+      color: #333;
+      margin: 0;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    h2 {
+      font-size: 16px;
+      margin: 0 0 12px 0;
+    }
+    #apiKey {
+      width: 100%;
+      padding: 6px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 13px;
+      box-sizing: border-box;
+    }
+    #analyzeButton {
+      background-color: #2196F3;
+      color: white;
+      padding: 8px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    #analyzeButton svg {
+      width: 16px;
+      height: 16px;
+    }
+    #analyzeButton:hover {
+      background-color: #1976D2;
+    }
+    #analyzeButton:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+    }
+    .status {
+      margin-top: 8px;
+      padding: 8px;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+    .error {
+      background-color: #ffebee;
+      color: #c62828;
+    }
+    .success {
+      background-color: #e8f5e9;
+      color: #2e7d32;
+    }
+    .loading {
+      display: none;
+      text-align: center;
+      margin-top: 8px;
+    }
+    .loading::after {
+      content: '';
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid #f3f3f3;
+      border-top: 2px solid #2196F3;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    #debugPanel {
+      margin-top: 12px;
+      border-top: 1px solid #eee;
+      padding-top: 12px;
+    }
+    #debugLog {
+      max-height: 150px;
+      overflow-y: auto;
+      background: #f5f5f5;
+      padding: 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-family: monospace;
+      margin-top: 8px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    details summary {
+      cursor: pointer;
+      padding: 6px 0;
+      user-select: none;
+      font-size: 12px;
+    }
+    .debug-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 8px;
+      font-size: 12px;
+    }
+    label {
+      font-size: 13px;
+      margin-bottom: 4px;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Claude Screenshot Analyzer</h2>
+    <div>
+      <label for="apiKey">Claude API Key:</label>
+      <input type="password" id="apiKey" placeholder="Enter your API key">
+    </div>
+    <button id="analyzeButton">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+        <circle cx="12" cy="13" r="4"/>
+      </svg>
+      Capture & Analyze
+    </button>
+    <div id="loading" class="loading"></div>
+    <div id="status" class="status"></div>
+    
+    <label class="debug-checkbox">
+      <input type="checkbox" id="showDebug">
+      Show Debug Information
+    </label>
+    
+    <div id="debugPanel" style="display: none;">
+      <details>
+        <summary>Debug Log</summary>
+        <pre id="debugLog"></pre>
+      </details>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

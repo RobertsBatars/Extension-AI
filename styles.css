@@ -1,0 +1,17 @@
+#claude-qa-container {
+    font-family: Arial, sans-serif;
+  }
+  
+  #claude-qa-container button:hover {
+    background-color: #1976D2;
+    box-shadow: 0 3px 7px rgba(0,0,0,0.3);
+  }
+  
+  #claude-qa-container .multiple-choice {
+    background-color: #4CAF50;
+  }
+  
+  #claude-qa-container .error {
+    background-color: #f44336;
+  }
+  
